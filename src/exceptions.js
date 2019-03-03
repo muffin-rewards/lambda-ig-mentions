@@ -1,5 +1,5 @@
 
-exports.LambdaException = class LambdaException extends Error {
+class LambdaException extends Error {
 
   /**
    * @param {number} status Http status
@@ -12,6 +12,12 @@ exports.LambdaException = class LambdaException extends Error {
 
 }
 
+exports.LambdaException = LambdaException
+
 exports.SignaturesMismatchException = class SignaturesMismatchException extends LambdaException {
+  //
+}
+
+exports.MissingClientIdException = class MissingClientIdException extends LambdaException {
   //
 }

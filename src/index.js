@@ -1,7 +1,7 @@
 const { sign } = require('./sign')
 const { persist } = require('./persist')
-const { LambdaException } = require('./exceptions')
 const { getMediaTuples, fetchMedia } = require('./media')
+const { LambdaException, MissingClientIdException } = require('./exceptions')
 
 /**
  * Access headers for CORs.
@@ -20,11 +20,20 @@ exports.handler = async (event, _, callback) => {
    * @param {number} status Http status to return
    * @param {string} body Response body
    */
-  const respond = (status, body) => callback(null, { status, body, headers })
+  const respond = (status, body = '') => callback(null, { status, body, headers })
 
   try {
     // If the signatures don't match, this throws.
     sign(event.headers['X-Hub-Signature'], event.body)
+
+    /**
+     * @var {number} client Client id
+     */
+    const client = event.pathParameters.client_id
+
+    if (!client) {
+      throw new MissingClientIdException(422, 'Missing client id.')
+    }
 
     /**
      * @var {any[]} entries New API mentions
@@ -41,9 +50,13 @@ exports.handler = async (event, _, callback) => {
     )
 
     // Persists all valid fetched media.
-    await persist(
-      media.filter(m => m.isSome()),
+    await Promise.all(
+      media
+        .filter(m => m.isSome())
+        .map(m => persist(client, m))
     )
+
+    respond(200)
   } catch (error) {
     console.log(error)
 

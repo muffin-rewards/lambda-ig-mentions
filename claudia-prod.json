@@ -1,0 +1,8 @@
+{
+  "lambda": {
+    "role": "arn:aws:iam::351847414812:role/MentionsPersistor",
+    "name": "prod-ig-mentions",
+    "region": "eu-west-1",
+    "sharedRole": true
+  }
+}
