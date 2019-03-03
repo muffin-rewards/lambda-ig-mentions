@@ -17,10 +17,10 @@ exports.handler = async (event, _, callback) => {
   console.log(event)
 
   /**
-   * @param {number} status Http status to return
+   * @param {number} statusCode Http statusCode to return
    * @param {string} body Response body
    */
-  const respond = (status, body = '') => callback(null, { status, body, headers })
+  const respond = (statusCode, body = '') => callback(null, { statusCode, body, headers })
 
   try {
     // If the signatures don't match, this throws.
