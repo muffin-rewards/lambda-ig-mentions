@@ -1,0 +1,25 @@
+{
+  "name": "lambda-ig-mentions",
+  "version": "1.0.0",
+  "description": "Authorises requests for mentions endpoints.",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "mocha test/setup.js test/**/*.spec.js",
+    "create:prod": "claudia create --name prod-ig-mentions --region eu-west-1 --handler src/index.handler --role arn:aws:iam::351847414812:role/BasicExecutor --config claudia-prod.json",
+    "deploy:prod": "claudia update --config claudia-prod.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/muffin-rewards/lambda-ig-mentions"
+  },
+  "author": {
+    "name": "Michael Bausano",
+    "email": "michael@getmuffin.co.uk"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^6.0.2",
+    "claudia": "^5.4.0"
+  }
+}
