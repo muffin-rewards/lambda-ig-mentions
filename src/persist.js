@@ -19,7 +19,7 @@ exports.persist = async (promoter, media) => {
       ':u': { S: item.media_url },
     },
     Key: {
-      handle: { S: media.username },
+      user: { S: media.username },
       promoter: { N: promoter },
     },
     ReturnValues: 'NONE',
