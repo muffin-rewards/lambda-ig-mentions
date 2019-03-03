@@ -18,6 +18,6 @@ exports.SignaturesMismatchException = class SignaturesMismatchException extends 
   //
 }
 
-exports.MissingClientIdException = class MissingClientIdException extends LambdaException {
+exports.MissingPromoterIdException = class MissingPromoterIdException extends LambdaException {
   //
 }

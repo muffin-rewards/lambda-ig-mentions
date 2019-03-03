@@ -19,7 +19,7 @@ A request has to have `X-Hub-Signature` header in format `sha1=${token}`.
 ## Response
 If the signatures don't match returns `403`.
 
-If the client id is missing returns `422`.
+If the promoter id is missing returns `422`.
 
 Any unexcepted error returns `500`.
 

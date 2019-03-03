@@ -6,10 +6,10 @@ AWS.config.update({ region: 'eu-west-1' })
 /**
  * Update/create media in DynamoDB.
  *
- * @param {number} client Client id
+ * @param {number} promoter Promoter id
  * @param {any} media Posts to persist
  */
-exports.persist = async (client, media) => {
+exports.persist = async (promoter, media) => {
   return ddb.updateItem({
     ExpressionAttributeValues: {
       ':at': { N: item.timestamp },
@@ -20,7 +20,7 @@ exports.persist = async (client, media) => {
     },
     Key: {
       handle: { S: media.username },
-      client: { N: client },
+      promoter: { N: promoter },
     },
     ReturnValues: 'NONE',
     TableName: 'mentions',

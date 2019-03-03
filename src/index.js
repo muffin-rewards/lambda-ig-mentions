@@ -1,7 +1,7 @@
 const { sign } = require('./sign')
 const { persist } = require('./persist')
 const { getMediaTuples, fetchMedia } = require('./media')
-const { LambdaException, MissingClientIdException } = require('./exceptions')
+const { LambdaException, MissingPromoterIdException } = require('./exceptions')
 
 /**
  * Access headers for CORs.
@@ -27,12 +27,12 @@ exports.handler = async (event, _, callback) => {
     sign(event.headers['X-Hub-Signature'], event.body)
 
     /**
-     * @var {number} client Client id
+     * @var {number} promoter Promoter id
      */
-    const client = event.pathParameters.client_id
+    const promoter = event.pathParameters.promoter_id
 
-    if (!client) {
-      throw new MissingClientIdException(422, 'Missing client id.')
+    if (!promoter) {
+      throw new MissingPromoterIdException(422, 'Missing promoter id.')
     }
 
     /**
@@ -53,7 +53,7 @@ exports.handler = async (event, _, callback) => {
     await Promise.all(
       media
         .filter(m => m.isSome())
-        .map(m => persist(client, m))
+        .map(m => persist(promoter, m))
     )
 
     respond(200)
