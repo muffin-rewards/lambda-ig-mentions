@@ -1,5 +1,5 @@
 
-describe('Authorizer lambda', () => {
+describe('Mentions lambda', () => {
 
   it('returns error if the token is invalid')
 
