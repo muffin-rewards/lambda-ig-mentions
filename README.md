@@ -15,6 +15,7 @@ To deploy for production, run `npm run deploy:prod`.
 
 ## Request
 A request has to have `X-Hub-Signature` header in format `sha1=${token}`.
+It also has to have a query parameter `promoter` with promoter handle.
 
 ## Response
 If the signatures don't match returns `403`.
