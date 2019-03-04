@@ -1,6 +1,6 @@
 {
   "name": "lambda-ig-mentions",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Webhook endpoint for IG APIs that persists mentions to the DynamoDB.",
   "main": "src/index.js",
   "scripts": {
