@@ -13,9 +13,6 @@ const headers = {
 }
 
 exports.handler = async (event, _, callback) => {
-  // TODO: Remove console log.
-  console.log(event)
-
   /**
    * @param {number} statusCode Http statusCode to return
    * @param {string} body Response body
