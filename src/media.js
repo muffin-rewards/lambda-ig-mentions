@@ -7,7 +7,7 @@ const { Some, None } = require('@bausano/data-structures')
  * @var {Awi} base
  */
 const base = () => new Awi()
-  .use(async req => req.base = 'https://graph.facebook.com')
+  .use(async req => req.base = 'https://graph.facebook.com/')
   .use(async req => req.query.access_token = `${process.env.APP_ID}|${process.env.APP_SECRET}`)
 
 /**
@@ -40,6 +40,8 @@ exports.getMediaTuples = (entries) => {
         post: change.value.media_id,
       })
     })
+
+    return tuples
   }, [])
 }
 
