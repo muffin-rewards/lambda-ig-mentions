@@ -54,7 +54,7 @@ exports.fetchMedia = async ({ user, post }) => {
   return base()
     .use(async req => req.query.fields = `mentioned_media.media_id(${post}){${fields.join(',')}}`)
     .optional(user)
-    .andThen(body => {
+    .andThen((body) => {
       // If checksum on the body keys does not match the requested fields length,
       // returns none. Otherwise return the mentioned media in some.
       return Object.keys(body.mentioned_media).length === fields.length
