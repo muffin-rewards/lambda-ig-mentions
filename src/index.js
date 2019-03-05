@@ -26,7 +26,7 @@ exports.handler = async (event, _, callback) => {
     /**
      * @var {number} promoter Promoter id
      */
-    const promoter = event.queryStringParameters.promoter
+    const promoter = event.pathParameters.promoter
 
     if (!promoter) {
       throw new MissingPromoterIdException(422, 'Missing promoter id.')
