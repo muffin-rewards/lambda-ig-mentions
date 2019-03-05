@@ -48,9 +48,10 @@ exports.handler = async (event, _, callback) => {
 
     // Persists all valid fetched media.
     await Promise.all(
-      media
-        .filter(m => m.isSome())
-        .map(m => persist(promoter, m))
+      media.map(o => o.mapOrElse(
+        response => persist(promoter, response),
+        () => Promise.resolve(),
+      ))
     )
 
     respond(200)

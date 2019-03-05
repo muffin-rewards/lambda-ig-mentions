@@ -7,7 +7,7 @@ AWS.config.update({ region: 'eu-west-1' })
  * Update/create media in DynamoDB.
  *
  * @param {number} promoter Promoter id
- * @param {any} media Posts to persist
+ * @param {Optional<any>} media Posts to persist
  */
 exports.persist = async (promoter, media) => {
   return ddb.updateItem({
