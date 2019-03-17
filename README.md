@@ -9,7 +9,7 @@ it stores it into DynamoDB.
 ## Deployment
 To deploy for production, run `npm run deploy:prod`.
 
-### Enviroment variables
+### Environment variables
 - `APP_ID` is Instagram app id
 - `APP_SECRET` is token associated with app
 
@@ -22,6 +22,6 @@ If the signatures don't match returns `401`.
 
 If the promoter id is missing returns `422`.
 
-Any unexcepted error returns `500`.
+Any unexpected error returns `500`.
 
 If everything is ok returns `200`.
