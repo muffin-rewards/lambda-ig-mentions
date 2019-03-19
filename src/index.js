@@ -1,5 +1,6 @@
 const { sign } = require('./sign')
 const { persist } = require('./persist')
+const { fetchToken } = require('./fetchToken')
 const { getMediaTuples, fetchMedia } = require('./media')
 const { LambdaException, MissingPromoterIdException } = require('./exceptions')
 
@@ -29,7 +30,7 @@ exports.handler = async (event, _, callback) => {
     const promoter = event.pathParameters.promoter
 
     if (!promoter) {
-      throw new MissingPromoterIdException(422, 'Missing promoter id.')
+      throw new MissingPromoterIdException
     }
 
     /**
@@ -38,12 +39,17 @@ exports.handler = async (event, _, callback) => {
     const entries = JSON.parse(event.body).entry
 
     /**
+     * @var {string} token Returns promoter's token.
+     */
+    const token = await fetchToken(promoter)
+
+    /**
      * Fetches media from Instagram APIs.
      *
      * @var {any[]} media Has information about each caption mention
      */
     const media = await Promise.all(
-      getMediaTuples(entries).map(fetchMedia),
+      getMediaTuples(entries).map(entry => fetchMedia(token, entry)),
     )
 
     // Persists all valid fetched media.

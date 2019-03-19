@@ -15,9 +15,34 @@ class LambdaException extends Error {
 exports.LambdaException = LambdaException
 
 exports.SignaturesMismatchException = class SignaturesMismatchException extends LambdaException {
-  //
+
+  /**
+   * @constructor
+   */
+  constructor () {
+    super(401, 'Signature is not valid')
+  }
+
 }
 
 exports.MissingPromoterIdException = class MissingPromoterIdException extends LambdaException {
-  //
+
+  /**
+   * @constructor
+   */
+  constructor () {
+    super(422, 'Missing promoter id.')
+  }
+
+}
+
+exports.InvalidPromoterIdException = class InvalidPromoterIdException extends LambdaException {
+
+  /**
+   * @constructor
+   */
+  constructor () {
+    super(422, 'Invalid promoter id.')
+  }
+
 }

@@ -8,7 +8,6 @@ const { Some, None } = require('@bausano/data-structures')
  */
 const base = () => new Awi()
   .use(async req => req.base = 'https://graph.facebook.com/')
-  .use(async req => req.query.access_token = `${process.env.APP_ID}|${process.env.APP_SECRET}`)
 
 /**
  * Which fields we want to store. For full list @see
@@ -50,8 +49,9 @@ exports.getMediaTuples = (entries) => {
  *
  * @return {Promise<Optional<any>>}
  */
-exports.fetchMedia = async ({ user, post }) => {
+exports.fetchMedia = async (token, { user, post }) => {
   const response = await base()
+    .use(async req => req.query.access_token = token)
     .use(async req => req.query.fields = `mentioned_media.media_id(${post}){${fields.join(',')}}`)
     .optional(user)
 

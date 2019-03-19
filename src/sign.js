@@ -16,5 +16,5 @@ exports.sign = (signature, body) => {
     return
   }
 
-  throw new SignaturesMismatchException(401, 'Signature is not valid')
+  throw new SignaturesMismatchException
 }
